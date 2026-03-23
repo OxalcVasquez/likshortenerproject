@@ -358,10 +358,10 @@ export const ManageAccount = () => {
 
 ## Middleware Configuration
 
-Clerk provides middleware to protect routes automatically. Configure in `middleware.ts` if needed:
+Clerk provides middleware to protect routes automatically. This project uses **`proxy.ts`** (at the project root) as the middleware file. **Never use `middleware.ts`** — `proxy.ts` is the project standard.
 
 ```typescript
-// middleware.ts
+// proxy.ts
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);

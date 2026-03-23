@@ -121,6 +121,7 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - Always use `userId` from Clerk context for data association
 - Server-side protected routes use `auth()` function from `@clerk/nextjs/server`
 - Client-side auth checks use `useAuth()` or `useUser()` hooks
+- **Clerk middleware lives in `proxy.ts` at the project root** — NEVER create or use `middleware.ts`
 - See: [Authentication Guidelines](docs/authentication-guidelines.md)
 
 ### TypeScript
@@ -197,6 +198,7 @@ See [Testing & Quality](docs/testing-and-quality.md) for detailed guidelines.
 
 ### ❌ Do NOT:
 - **START CODING WITHOUT READING THE RELEVANT /docs FILE** ← Most critical mistake
+- Create or rename files to `middleware.ts` — **always use `proxy.ts`** for Clerk middleware
 - Use `any` type
 - Use array index as React key prop
 - Call hooks conditionally
