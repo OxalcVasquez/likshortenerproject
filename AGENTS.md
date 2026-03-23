@@ -2,10 +2,6 @@
 
 This file defines coding standards and best practices for all AI agents and LLMs contributing to the **Lik Shortener** project. These instructions ensure consistent code quality, maintainability, and project integrity.
 
-## ⚠️ CRITICAL RULE: ALWAYS READ /docs BEFORE WRITING CODE
-
-**This is non-negotiable.** Before generating ANY code, you MUST read the relevant documentation files from the `/docs` directory. These documents define exact specifications, patterns, and standards for your implementation. Failure to read them will result in code that doesn't match project standards.
-
 ## Project Overview
 
 **Lik Shortener** is a modern URL shortening service built with:
@@ -16,24 +12,6 @@ This file defines coding standards and best practices for all AI agents and LLMs
 - **Authentication**: Clerk
 - **Language**: TypeScript (strict mode)
 - **Code Quality**: ESLint + TypeScript strict checks
-
-## Quick Links to Documentation
-
-All coding standards are documented in the `/docs` directory.
-
-**🔴 MANDATORY: ALWAYS refer to the relevant .md file BEFORE generating any code.** No exceptions. No shortcuts. Read first, code second.
-
-| Document | Purpose |
-|----------|---------|
-| [Authentication Guidelines](docs/authentication-guidelines.md) | Clerk setup, route protection, sign in/up modals |
-| [shadcn/ui Guidelines](docs/shadcn-ui-guidelines.md) | Component usage, best practices, integration patterns |
-| [Code Style](docs/code-style.md) | Formatting, naming, imports, comments |
-| [TypeScript Guidelines](docs/typescript-guidelines.md) | Type system, generics, null handling |
-| [React Component Guidelines](docs/react-component-guidelines.md) | Components, hooks, patterns, performance |
-| [Database Conventions](docs/database-conventions.md) | Drizzle ORM, schema, queries, migrations |
-| [File Structure](docs/file-structure.md) | Directory organization, module structure |
-| [Testing & Quality](docs/testing-and-quality.md) | Testing practices, code review, linting |
-| [API Design](docs/api-design.md) | Route structure, validation, error handling |
 
 ## Core Principles
 
@@ -85,20 +63,6 @@ drizzle-kit generate # Generate migrations
 drizzle-kit push     # Apply migrations to database
 ```
 
-## Before You Write Code
-
-### ⚠️ STEP 0 (MANDATORY): READ THE RELEVANT /docs FILE FIRST
-Before doing ANYTHING else, identify which `/docs` file is relevant to your task:
-- Working with authentication? Read [Authentication Guidelines](docs/authentication-guidelines.md)
-- Creating UI components? Read [shadcn/ui Guidelines](docs/shadcn-ui-guidelines.md)
-
-**Do not skip this step.** Read the entire relevant documentation file(s) before writing a single line of code.
-
-### Then proceed with:
-1. **Understand the project structure** - see [File Structure](docs/file-structure.md)
-2. **Check existing patterns** - follow established conventions in the codebase
-3. **Plan database changes** - schema modifications require migrations
-
 ## Before You Commit Code
 
 - [ ] Run `npm run lint` - must pass with zero errors
@@ -122,14 +86,12 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - Server-side protected routes use `auth()` function from `@clerk/nextjs/server`
 - Client-side auth checks use `useAuth()` or `useUser()` hooks
 - **Clerk middleware lives in `proxy.ts` at the project root** — NEVER create or use `middleware.ts`
-- See: [Authentication Guidelines](docs/authentication-guidelines.md)
 
 ### TypeScript
 - Strict mode enabled - all strict checks active
 - Explicit return types required on all functions
 - No implicit `any` types
 - Type inference for complex generics
-- See: [TypeScript Guidelines](docs/typescript-guidelines.md)
 
 ### React Components
 - Functional components only (no class components)
@@ -137,7 +99,6 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - Proper dependency arrays for effects
 - Memoization for performance-critical components
 - Semantic HTML with accessibility
-- See: [React Component Guidelines](docs/react-component-guidelines.md)
 
 ### User Interface (shadcn/ui)
 - **ALL UI elements use shadcn/ui** - no custom components allowed
@@ -145,7 +106,6 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - Combine shadcn components for features
 - Use Tailwind CSS classes to customize appearance
 - Components include accessibility out-of-the-box
-- See: [shadcn/ui Guidelines](docs/shadcn-ui-guidelines.md)
 
 ### Database (Drizzle ORM)
 - Schema defined in `db/schema.ts`
@@ -153,7 +113,6 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - All queries use proper error handling
 - Transactions for related operations
 - Type inference from schema
-- See: [Database Conventions](docs/database-conventions.md)
 
 ### API Routes
 - Consistent error response format
@@ -161,14 +120,12 @@ Before doing ANYTHING else, identify which `/docs` file is relevant to your task
 - Proper HTTP status codes
 - Authentication checks where needed
 - CORS headers if required
-- See: [API Design](docs/api-design.md)
 
 ### Code Style
 - 2-space indentation
 - Double quotes for strings
 - Trailing commas in multi-line objects
 - No semicolon omission
-- See: [Code Style](docs/code-style.md)
 
 ## File Organization
 
@@ -182,8 +139,6 @@ source/
 └── docs/             # Project documentation (this folder)
 ```
 
-See [File Structure](docs/file-structure.md) for detailed directory organization.
-
 ## Testing Standards
 
 - Unit tests for utility functions
@@ -192,12 +147,10 @@ See [File Structure](docs/file-structure.md) for detailed directory organization
 - Edge cases covered
 - No skipped tests (no `.skip`, `.only`)
 
-See [Testing & Quality](docs/testing-and-quality.md) for detailed guidelines.
 
 ## Common Pitfalls to Avoid
 
 ### ❌ Do NOT:
-- **START CODING WITHOUT READING THE RELEVANT /docs FILE** ← Most critical mistake
 - Create or rename files to `middleware.ts` — **always use `proxy.ts`** for Clerk middleware
 - Use `any` type
 - Use array index as React key prop
@@ -232,7 +185,6 @@ See [Testing & Quality](docs/testing-and-quality.md) for detailed guidelines.
 
 When contributing to this project:
 
-1. Check the relevant `/docs` file first
 2. Review existing similar code in the codebase
 3. Run `npm run lint` to catch issues early
 4. Ensure all TypeScript errors are resolved
@@ -265,15 +217,6 @@ Required environment variables (add to `.env.local`):
 3. Implement user data filtering by userId in database queries
 4. Handle both server-side and client-side auth checks
 
-See [Authentication Guidelines](docs/authentication-guidelines.md)
-
-### Adding Sign In/Sign Up Modals
-1. Create modal component using Clerk's `<SignIn />` or `<SignUp />` component
-2. Manage modal state in parent component
-3. Import from `@clerk/nextjs`
-4. Always use modal pattern (never separate pages for auth)
-
-See [Authentication Guidelines](docs/authentication-guidelines.md)
 
 ### Adding a New Component
 1. Create file in `components/` following naming convention
@@ -281,7 +224,6 @@ See [Authentication Guidelines](docs/authentication-guidelines.md)
 3. Export as named export
 4. Import and use with path alias
 
-See [React Component Guidelines](docs/react-component-guidelines.md)
 
 ### Adding a New API Route
 1. Create `app/api/route-name/route.ts`
@@ -289,7 +231,6 @@ See [React Component Guidelines](docs/react-component-guidelines.md)
 3. Implement proper error handling
 4. Return consistent error responses
 
-See [API Design](docs/api-design.md)
 
 ### Database Schema Changes
 1. Modify `db/schema.ts`
@@ -297,7 +238,6 @@ See [API Design](docs/api-design.md)
 3. Review generated migration SQL
 4. Run `drizzle-kit push` to apply
 
-See [Database Conventions](docs/database-conventions.md)
 
 ### Adding a New Utility Function
 1. Create in `lib/` with camelCase name
@@ -306,16 +246,10 @@ See [Database Conventions](docs/database-conventions.md)
 4. Write unit tests
 5. Import with `@/lib/` path alias
 
-See [File Structure](docs/file-structure.md)
 
 ## Linting & Code Quality
 
 **The project uses ESLint with Next.js and TypeScript configurations.**
-
-### DOCUMENTATION FIRST, THEN LINTING
-1. **Read the relevant `/docs` file** - this is your foundation
-2. **Write code following those specifications**
-3. **Then run linting** to catch remaining issues
 
 Before any contribution:
 ```bash
@@ -328,7 +262,6 @@ This must pass with **zero errors**. Common issues:
 - Type errors (will fail)
 - Implicit `any` types (will fail)
 
-Fix linting issues by following the error messages and referencing the relevant documentation.
 
 ## Code Review Checklist
 
@@ -348,7 +281,6 @@ When reviewing or submitting code:
 ## Questions or Clarifications?
 
 When in doubt:
-1. Check the relevant `/docs` file
 2. Look for similar code in the codebase
 3. Follow the established patterns
 4. Run the linter to catch issues

@@ -1,3 +1,8 @@
+---
+description: This file provides detailed guidelines for using shadcn/ui components in the project.
+applyTo: **/*.tsx
+---
+
 # shadcn/ui Component Standards
 
 ## Overview
