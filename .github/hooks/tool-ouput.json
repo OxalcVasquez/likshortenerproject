@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "bash": "bash",
+        "type": "command",
+        "command": "cat > tmp/$(date +%s).json"
+      }
+    ]
+  }
+}
