@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { type ShortUrl } from "@/db/schema";
-import { deleteLink } from "./actions";
+} from '@/components/ui/dialog';
+import { type ShortUrl } from '@/db/schema';
+import { deleteLink } from './actions';
 
 type DeleteLinkDialogProps = {
   link: ShortUrl;
@@ -27,7 +27,7 @@ export function DeleteLinkDialog({ link }: DeleteLinkDialogProps) {
     startTransition(async () => {
       const result = await deleteLink({ id: link.id });
       if (!result.success) {
-        setError(result.error ?? "Something went wrong.");
+        setError(result.error ?? 'Something went wrong.');
         return;
       }
       setOpen(false);
@@ -52,9 +52,9 @@ export function DeleteLinkDialog({ link }: DeleteLinkDialogProps) {
         </DialogHeader>
         <div className="space-y-4">
           <p className="text-gray-300">
-            Are you sure you want to delete{" "}
-            <span className="font-semibold text-white">/{link.slug}</span>? This action cannot be
-            undone.
+            Are you sure you want to delete{' '}
+            <span className="font-semibold text-white">/{link.slug}</span>? This
+            action cannot be undone.
           </p>
           {error && <p className="text-sm text-red-400">{error}</p>}
           <div className="flex justify-end gap-3 pt-2">
@@ -67,8 +67,12 @@ export function DeleteLinkDialog({ link }: DeleteLinkDialogProps) {
             >
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleConfirm} disabled={isPending}>
-              {isPending ? "Deleting..." : "Delete link"}
+            <Button
+              variant="destructive"
+              onClick={handleConfirm}
+              disabled={isPending}
+            >
+              {isPending ? 'Deleting...' : 'Delete link'}
             </Button>
           </div>
         </div>

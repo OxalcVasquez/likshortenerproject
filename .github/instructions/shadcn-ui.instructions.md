@@ -14,6 +14,7 @@ shadcn/ui is a high-quality component library built on Radix UI primitives and s
 ## Installation & Setup
 
 ### Adding shadcn Components
+
 Use the shadcn CLI to add components to your project:
 
 ```bash
@@ -21,6 +22,7 @@ npx shadcn-ui@latest add [component-name]
 ```
 
 Examples:
+
 ```bash
 npx shadcn-ui@latest add button
 npx shadcn-ui@latest add card
@@ -30,6 +32,7 @@ npx shadcn-ui@latest add form
 ```
 
 ### Component Location
+
 Components are installed in `components/ui/` directory:
 
 ```
@@ -47,17 +50,19 @@ components/
 ## Using shadcn Components
 
 ### Import Pattern
+
 ```typescript
 // ✅ Good: Import from components/ui
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 
 // ❌ Bad: Don't create custom button components
 // import { CustomButton } from "@/components/CustomButton";
 ```
 
 ### Basic Component Usage
+
 ```typescript
 import { Button } from "@/components/ui/button";
 
@@ -73,6 +78,7 @@ export const HomePage = () => {
 ## Common Components & Variants
 
 ### Button
+
 ```typescript
 import { Button } from "@/components/ui/button";
 
@@ -101,6 +107,7 @@ export const ButtonExamples = () => {
 ```
 
 ### Card
+
 ```typescript
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -120,6 +127,7 @@ export const CardExample = () => {
 ```
 
 ### Dialog (Modal)
+
 ```typescript
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -143,6 +151,7 @@ export const DialogExample = () => {
 ```
 
 ### Input
+
 ```typescript
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -163,6 +172,7 @@ export const InputExample = () => {
 ```
 
 ### Form
+
 ```typescript
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -205,6 +215,7 @@ export const FormExample = () => {
 ## Component Composition
 
 ### Combining shadcn Components
+
 ```typescript
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -243,6 +254,7 @@ export const UrlCreationCard = () => {
 ## Theming & Customization
 
 ### Tailwind CSS Classes
+
 shadcn components use Tailwind CSS classes. Customize appearance using Tailwind:
 
 ```typescript
@@ -250,7 +262,7 @@ import { Button } from "@/components/ui/button";
 
 export const CustomButton = () => {
   return (
-    <Button 
+    <Button
       className="bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 rounded-full"
     >
       Gradient Button
@@ -260,6 +272,7 @@ export const CustomButton = () => {
 ```
 
 ### Common Tailwind Utilities
+
 - `className="mt-4"` - Margin top
 - `className="p-6"` - Padding
 - `className="w-full"` - Width
@@ -275,6 +288,7 @@ export const CustomButton = () => {
 ## Best Practices
 
 ### ✅ Do:
+
 - Use shadcn components for all UI elements
 - Combine multiple shadcn components to create features
 - Use Tailwind classes to customize appearance
@@ -284,6 +298,7 @@ export const CustomButton = () => {
 - Utilize form integrations (react-hook-form + Form component)
 
 ### ❌ Do NOT:
+
 - Create custom button, input, card, or other UI components
 - Style elements from scratch when shadcn has a component
 - Use HTML elements directly when shadcn alternatives exist
@@ -294,6 +309,7 @@ export const CustomButton = () => {
 ## Component Accessibility
 
 All shadcn components are built on Radix UI primitives and include:
+
 - ARIA attributes by default
 - Keyboard navigation support
 - Screen reader compatibility
@@ -328,6 +344,7 @@ See [shadcn/ui documentation](https://ui.shadcn.com) for complete list and detai
 ## Integration with Other Libraries
 
 ### react-hook-form
+
 Use with shadcn Form component:
 
 ```typescript
@@ -358,6 +375,7 @@ export const MyForm = () => {
 ```
 
 ### Zod (Validation)
+
 Combine with react-hook-form for type-safe forms:
 
 ```typescript
@@ -389,6 +407,7 @@ export const TypeSafeForm = () => {
 ## Styling Patterns
 
 ### Space & Gap
+
 ```typescript
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -407,6 +426,7 @@ export const SpacedContent = () => {
 ```
 
 ### Flexbox Layouts
+
 ```typescript
 import { Button } from "@/components/ui/button";
 
@@ -421,6 +441,7 @@ export const FlexLayout = () => {
 ```
 
 ### Responsive Design
+
 ```typescript
 import { Card } from "@/components/ui/card";
 
@@ -437,6 +458,7 @@ export const ResponsiveCard = () => {
 ## Common Patterns
 
 ### Modal Dialog
+
 ```typescript
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -462,6 +484,7 @@ export const ModalPattern = () => {
 ```
 
 ### Card with Actions
+
 ```typescript
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

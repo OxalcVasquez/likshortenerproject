@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "tool": "format",
+        "command": "npx prettier --write .",
+        "bash": "bash",
+        "type": "command"
+      }
+    ]
+  }
+}

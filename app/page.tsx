@@ -1,15 +1,21 @@
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { Link2, PenLine, BarChart2, Zap, CheckCircle2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { HeroCTA } from "@/components/homepage/HeroCTA";
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+import { Link2, PenLine, Zap, CheckCircle2 } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { HeroCTA } from '@/components/homepage/HeroCTA';
 
 export default async function Home() {
   const { userId } = await auth();
 
   if (userId) {
-    redirect("/dashboard");
+    redirect('/dashboard');
   }
 
   return (
@@ -20,12 +26,12 @@ export default async function Home() {
           ✨ Simple. Fast. Powerful.
         </Badge>
         <h1 className="mb-6 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-          Shorten URLs,{" "}
+          Shorten URLs,{' '}
           <span className="text-muted-foreground">Amplify Your Reach</span>
         </h1>
         <p className="mb-10 max-w-xl text-lg text-muted-foreground">
           Transform long, unwieldy links into clean, shareable short URLs in
-          seconds. Track every click and grow your audience with Lik Shortener.
+          seconds. Simple, fast, and reliable with Lik Shortener.
         </p>
         <HeroCTA />
       </section>
@@ -38,11 +44,10 @@ export default async function Home() {
               Everything you need to manage links
             </h2>
             <p className="text-muted-foreground">
-              Powerful features to help you create, manage, and track your short
-              URLs.
+              Powerful features to help you create and manage your short URLs.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="border-border bg-card">
               <CardHeader className="pb-3">
                 <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-muted">
@@ -69,21 +74,6 @@ export default async function Home() {
                 <CardDescription>
                   Create branded, memorable slugs that reflect your content.
                   Stand out with personalized URLs.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border bg-card">
-              <CardHeader className="pb-3">
-                <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-muted">
-                  <BarChart2 className="size-5 text-foreground" />
-                </div>
-                <CardTitle className="text-lg">Click Analytics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Track how many people click your links and monitor your
-                  campaign performance in real time.
                 </CardDescription>
               </CardContent>
             </Card>

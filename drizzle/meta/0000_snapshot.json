@@ -74,9 +74,7 @@
         "short_urls_slug_unique": {
           "name": "short_urls_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},

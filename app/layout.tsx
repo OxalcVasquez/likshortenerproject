@@ -1,26 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
-import { ClerkProvider, SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
-import { shadcn } from "@clerk/ui/themes";
-import { Link2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import Link from 'next/link';
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  Show,
+  UserButton,
+} from '@clerk/nextjs';
+import { shadcn } from '@clerk/ui/themes';
+import { Link2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Lik Shortener — Shorten URLs, Amplify Your Reach",
+  title: 'Lik Shortener — Shorten URLs, Amplify Your Reach',
   description:
-    "Transform long links into clean, shareable short URLs. Track clicks and grow your audience with Lik Shortener.",
+    'Transform long links into clean, shareable short URLs. Track clicks and grow your audience with Lik Shortener.',
 };
 
 export default function RootLayout({

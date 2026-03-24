@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
-import { ArrowRight, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import { ArrowRight, LogIn } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function HeroCTA() {
   return (
@@ -25,11 +25,7 @@ export function HeroCTA() {
         forceRedirectUrl="/dashboard"
         fallbackRedirectUrl="/dashboard"
       >
-        <Button
-          variant="outline"
-          size="lg"
-          className="w-full gap-2 sm:w-auto"
-        >
+        <Button variant="outline" size="lg" className="w-full gap-2 sm:w-auto">
           <LogIn className="size-4" />
           Sign In
         </Button>

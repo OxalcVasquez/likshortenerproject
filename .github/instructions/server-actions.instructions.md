@@ -44,16 +44,18 @@ export async function createLink(formData: FormData) { ... }
 Every server action must validate its input using **Zod** before any database operation.
 
 ```ts
-import { z } from "zod";
+import { z } from 'zod';
 
 const createLinkSchema = z.object({
   url: z.string().url(),
   slug: z.string().min(1).max(50),
 });
 
-export async function createLink(input: CreateLinkInput): Promise<{ success: boolean; error?: string }> {
+export async function createLink(
+  input: CreateLinkInput,
+): Promise<{ success: boolean; error?: string }> {
   const parsed = createLinkSchema.safeParse(input);
-  if (!parsed.success) return { success: false, error: "Invalid input" };
+  if (!parsed.success) return { success: false, error: 'Invalid input' };
   // ...
 }
 ```
@@ -63,11 +65,13 @@ export async function createLink(input: CreateLinkInput): Promise<{ success: boo
 Every server action must verify that a user is logged in (via Clerk) **before** performing any database operation.
 
 ```ts
-import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
-export async function createLink(input: CreateLinkInput): Promise<{ success: boolean; error?: string }> {
+export async function createLink(
+  input: CreateLinkInput,
+): Promise<{ success: boolean; error?: string }> {
   const { userId } = await auth();
-  if (!userId) return { success: false, error: "Unauthorized" };
+  if (!userId) return { success: false, error: 'Unauthorized' };
   // proceed with validated input and database operations
 }
 ```
@@ -80,24 +84,26 @@ Server actions must **never** throw errors. Instead, always return a typed resul
 type ActionResult = { success: boolean; error?: string };
 
 // ✅ Correct
-export async function createLink(input: CreateLinkInput): Promise<ActionResult> {
+export async function createLink(
+  input: CreateLinkInput,
+): Promise<ActionResult> {
   const { userId } = await auth();
-  if (!userId) return { success: false, error: "Unauthorized" };
+  if (!userId) return { success: false, error: 'Unauthorized' };
 
   const parsed = createLinkSchema.safeParse(input);
-  if (!parsed.success) return { success: false, error: "Invalid input" };
+  if (!parsed.success) return { success: false, error: 'Invalid input' };
 
   try {
     await insertLink({ ...parsed.data, userId });
     return { success: true };
   } catch {
-    return { success: false, error: "Something went wrong" };
+    return { success: false, error: 'Something went wrong' };
   }
 }
 
 // ❌ Wrong
 export async function createLink(input: CreateLinkInput): Promise<void> {
-  throw new Error("Unauthorized"); // never throw
+  throw new Error('Unauthorized'); // never throw
 }
 ```
 

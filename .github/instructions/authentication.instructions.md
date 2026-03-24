@@ -13,6 +13,7 @@ Clerk manages user identity, sign-in, sign-up, and session management. These gui
 ## Clerk Setup
 
 ### Environment Variables Required
+
 ```
 CLERK_PUBLISHABLE_KEY=pk_test_...
 CLERK_SECRET_KEY=sk_test_...
@@ -21,7 +22,9 @@ CLERK_SECRET_KEY=sk_test_...
 Never commit these keys - use `.env.local` for local development.
 
 ### Clerk App Router Integration
+
 Clerk is integrated via `@clerk/nextjs` package. The integration handles:
+
 - Authentication middleware
 - Session management
 - User context providers
@@ -100,7 +103,7 @@ export const LoginModal = () => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <SignIn 
+        <SignIn
           appearance={{
             elements: {
               rootBox: "w-full",
@@ -125,7 +128,7 @@ export const SignUpModal = () => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <SignUp 
+        <SignUp
           appearance={{
             elements: {
               rootBox: "w-full",
@@ -227,18 +230,15 @@ Use `auth()` in API route handlers to verify authentication:
 
 ```typescript
 // app/api/urls/route.ts
-import { auth } from "@clerk/nextjs/server";
-import { NextRequest, NextResponse } from "next/server";
+import { auth } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const { userId } = await auth();
 
   // Return 401 if not authenticated
   if (!userId) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   // Fetch user-specific data
@@ -250,10 +250,7 @@ export async function POST(request: NextRequest) {
   const { userId } = await auth();
 
   if (!userId) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const body = await request.json();
@@ -278,7 +275,7 @@ const userUrls = await db
   .where(eq(shortUrls.userId, userId));
 
 // ❌ Bad: Don't parse tokens or use other auth methods
-const token = request.headers.get("authorization");
+const token = request.headers.get('authorization');
 // Don't do this - use Clerk's auth() instead
 ```
 
@@ -288,14 +285,14 @@ When storing user data in the database, always associate it with `userId`:
 
 ```typescript
 // db/schema.ts
-import { pgTable, varchar, serial, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, varchar, serial, timestamp } from 'drizzle-orm/pg-core';
 
-export const shortUrls = pgTable("short_urls", {
-  id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull(), // Always include userId
-  slug: varchar("slug", { length: 50 }).unique().notNull(),
-  originalUrl: varchar("original_url", { length: 2048 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+export const shortUrls = pgTable('short_urls', {
+  id: serial('id').primaryKey(),
+  userId: varchar('user_id').notNull(), // Always include userId
+  slug: varchar('slug', { length: 50 }).unique().notNull(),
+  originalUrl: varchar('original_url', { length: 2048 }).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 ```
 
@@ -345,6 +342,7 @@ export const ManageAccount = () => {
 ## Security Best Practices
 
 ### ✅ Do:
+
 - Always check `userId` in protected routes and API endpoints
 - Use `auth()` on the server side for sensitive operations
 - Redirect unauthenticated users from protected pages
@@ -353,6 +351,7 @@ export const ManageAccount = () => {
 - Log authentication errors for debugging
 
 ### ❌ Do NOT:
+
 - Use any auth method other than Clerk
 - Hardcode Clerk keys in code
 - Trust client-side auth checks for sensitive operations
@@ -366,9 +365,9 @@ Clerk provides middleware to protect routes automatically. This project uses **`
 
 ```typescript
 // proxy.ts
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) {
@@ -380,9 +379,9 @@ export default clerkMiddleware((auth, req) => {
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     // Always run for API routes
-    "/(api|trpc)(.*)",
+    '/(api|trpc)(.*)',
   ],
 };
 ```
@@ -452,6 +451,7 @@ export const CreateUrlButton = () => {
 ## Environment Setup
 
 ### Development
+
 ```bash
 # .env.local
 CLERK_PUBLISHABLE_KEY=pk_test_...
@@ -459,6 +459,7 @@ CLERK_SECRET_KEY=sk_test_...
 ```
 
 ### Production
+
 - Set environment variables in your hosting platform (Vercel, etc.)
 - Never expose `CLERK_SECRET_KEY` to the client
 - Use the publishable key only on the frontend

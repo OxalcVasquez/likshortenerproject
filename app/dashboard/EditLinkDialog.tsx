@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { type ShortUrl } from "@/db/schema";
-import { updateLink } from "./actions";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { type ShortUrl } from '@/db/schema';
+import { updateLink } from './actions';
 
 type EditLinkDialogProps = {
   link: ShortUrl;
@@ -41,7 +41,7 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
     startTransition(async () => {
       const result = await updateLink({ id: link.id, url, slug });
       if (!result.success) {
-        setError(result.error ?? "Something went wrong.");
+        setError(result.error ?? 'Something went wrong.');
         return;
       }
       handleOpenChange(false);
@@ -51,7 +51,11 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline" className="border-gray-700 text-gray-300 hover:text-white hover:bg-gray-800">
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-gray-700 text-gray-300 hover:text-white hover:bg-gray-800"
+        >
           Edit
         </Button>
       </DialogTrigger>
@@ -102,7 +106,7 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
               Cancel
             </Button>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Saving..." : "Save changes"}
+              {isPending ? 'Saving...' : 'Save changes'}
             </Button>
           </div>
         </form>

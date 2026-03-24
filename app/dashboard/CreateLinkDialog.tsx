@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { createLink } from "./actions";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { createLink } from './actions';
 
 export function CreateLinkDialog() {
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("");
-  const [slug, setSlug] = useState("");
+  const [url, setUrl] = useState('');
+  const [slug, setSlug] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   function handleOpenChange(value: boolean) {
     setOpen(value);
     if (!value) {
-      setUrl("");
-      setSlug("");
+      setUrl('');
+      setSlug('');
       setError(null);
     }
   }
@@ -36,7 +36,7 @@ export function CreateLinkDialog() {
     startTransition(async () => {
       const result = await createLink({ url, slug });
       if (!result.success) {
-        setError(result.error ?? "Something went wrong.");
+        setError(result.error ?? 'Something went wrong.');
         return;
       }
       handleOpenChange(false);
@@ -95,7 +95,7 @@ export function CreateLinkDialog() {
               Cancel
             </Button>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Creating..." : "Create link"}
+              {isPending ? 'Creating...' : 'Create link'}
             </Button>
           </div>
         </form>

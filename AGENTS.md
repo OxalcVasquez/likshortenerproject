@@ -5,6 +5,7 @@ This file defines coding standards and best practices for all AI agents and LLMs
 ## Project Overview
 
 **Lik Shortener** is a modern URL shortening service built with:
+
 - **Frontend**: React 19 + Next.js 16 (App Router)
 - **Backend**: Next.js API Routes
 - **Database**: PostgreSQL (Neon) with Drizzle ORM
@@ -16,30 +17,35 @@ This file defines coding standards and best practices for all AI agents and LLMs
 ## Core Principles
 
 ### 1. **Type Safety First**
+
 - Enable TypeScript strict mode to catch errors at compile time
 - Always provide explicit type annotations for function parameters and returns
 - Avoid `any` type entirely - use `unknown` when type is truly unknown
 - Use type guards to narrow types safely
 
 ### 2. **Code Quality Over Speed**
+
 - All code must pass `npm run lint` with zero errors
 - Invalid TypeScript will not be merged
 - Comments should explain "why" not "what"
 - Prioritize readability and maintainability
 
 ### 3. **Consistency Matters**
+
 - Follow the established naming conventions (PascalCase components, camelCase utilities)
 - Maintain consistent code style across the codebase
 - Use the configured path aliases (`@/*`) in all imports
 - Keep directory structure organized and logical
 
 ### 4. **Security & Validation**
+
 - Always validate user input on the backend
 - Use Zod or similar for runtime validation of API requests
 - Never hardcode secrets - use environment variables
 - Protect sensitive operations with authentication checks
 
 ### 5. **Performance Conscious**
+
 - Minimize unnecessary re-renders in React components
 - Use memoization (`memo`, `useMemo`, `useCallback`) appropriately
 - Optimize database queries - select only needed columns
@@ -78,6 +84,7 @@ drizzle-kit push     # Apply migrations to database
 ## Key Standards By Topic
 
 ### Authentication & Authorization
+
 - **All authentication MUST use Clerk** - no other auth methods allowed
 - `/dashboard` and sensitive routes require authentication checks
 - Logged-in users on homepage should redirect to `/dashboard`
@@ -88,12 +95,14 @@ drizzle-kit push     # Apply migrations to database
 - **Clerk middleware lives in `proxy.ts` at the project root** — NEVER create or use `middleware.ts`
 
 ### TypeScript
+
 - Strict mode enabled - all strict checks active
 - Explicit return types required on all functions
 - No implicit `any` types
 - Type inference for complex generics
 
 ### React Components
+
 - Functional components only (no class components)
 - Hooks for all state management
 - Proper dependency arrays for effects
@@ -101,6 +110,7 @@ drizzle-kit push     # Apply migrations to database
 - Semantic HTML with accessibility
 
 ### User Interface (shadcn/ui)
+
 - **ALL UI elements use shadcn/ui** - no custom components allowed
 - Always import from `@/components/ui`
 - Combine shadcn components for features
@@ -108,6 +118,7 @@ drizzle-kit push     # Apply migrations to database
 - Components include accessibility out-of-the-box
 
 ### Database (Drizzle ORM)
+
 - Schema defined in `db/schema.ts`
 - Client initialized in `db/index.ts`
 - All queries use proper error handling
@@ -115,6 +126,7 @@ drizzle-kit push     # Apply migrations to database
 - Type inference from schema
 
 ### API Routes
+
 - Consistent error response format
 - Input validation with Zod
 - Proper HTTP status codes
@@ -122,6 +134,7 @@ drizzle-kit push     # Apply migrations to database
 - CORS headers if required
 
 ### Code Style
+
 - 2-space indentation
 - Double quotes for strings
 - Trailing commas in multi-line objects
@@ -147,10 +160,10 @@ source/
 - Edge cases covered
 - No skipped tests (no `.skip`, `.only`)
 
-
 ## Common Pitfalls to Avoid
 
 ### ❌ Do NOT:
+
 - Create or rename files to `middleware.ts` — **always use `proxy.ts`** for Clerk middleware
 - Use `any` type
 - Use array index as React key prop
@@ -167,6 +180,7 @@ source/
 - Create custom UI components - use shadcn/ui always
 
 ### ✅ Do:
+
 - Use explicit types everywhere
 - Validate all user input
 - Handle all error cases
@@ -193,6 +207,7 @@ When contributing to this project:
 ## Project Dependencies
 
 ### Key Versions
+
 - Next.js 16.1.6
 - React 19.2.3
 - TypeScript 5
@@ -205,6 +220,7 @@ See `package.json` for full dependency list.
 ## Environment Variables
 
 Required environment variables (add to `.env.local`):
+
 - `CLERK_SECRET_KEY` - Clerk authentication secret
 - `DATABASE_URL` - Neon PostgreSQL connection string
 - Other API secrets - never commit to repository
@@ -212,56 +228,57 @@ Required environment variables (add to `.env.local`):
 ## Common Tasks
 
 ### Protecting a Route with Authentication
+
 1. Use `auth()` from `@clerk/nextjs/server` on server components
 2. Check `userId` is present, redirect if not
 3. Implement user data filtering by userId in database queries
 4. Handle both server-side and client-side auth checks
 
-
 ### Adding a New Component
+
 1. Create file in `components/` following naming convention
 2. Define TypeScript interface for props
 3. Export as named export
 4. Import and use with path alias
 
-
 ### Adding a New API Route
+
 1. Create `app/api/route-name/route.ts`
 2. Define request/response types with Zod
 3. Implement proper error handling
 4. Return consistent error responses
 
-
 ### Database Schema Changes
+
 1. Modify `db/schema.ts`
 2. Run `drizzle-kit generate` to create migration
 3. Review generated migration SQL
 4. Run `drizzle-kit push` to apply
 
-
 ### Adding a New Utility Function
+
 1. Create in `lib/` with camelCase name
 2. Export from file
 3. Add JSDoc comment explaining purpose
 4. Write unit tests
 5. Import with `@/lib/` path alias
 
-
 ## Linting & Code Quality
 
 **The project uses ESLint with Next.js and TypeScript configurations.**
 
 Before any contribution:
+
 ```bash
 npm run lint
 ```
 
 This must pass with **zero errors**. Common issues:
+
 - Unused variables/imports (will fail)
 - Missing React hook dependencies (will fail)
 - Type errors (will fail)
 - Implicit `any` types (will fail)
-
 
 ## Code Review Checklist
 
@@ -280,11 +297,7 @@ When reviewing or submitting code:
 
 ## Questions or Clarifications?
 
-When in doubt:
-2. Look for similar code in the codebase
-3. Follow the established patterns
-4. Run the linter to catch issues
-5. Ensure TypeScript strict mode passes
+When in doubt: 2. Look for similar code in the codebase 3. Follow the established patterns 4. Run the linter to catch issues 5. Ensure TypeScript strict mode passes
 
 ---
 
