@@ -18,7 +18,7 @@ export default async function DashboardPage() {
   const links: ShortUrl[] = await getLinksByUserId(userId);
 
   return (
-    <div className="min-h-screen bg-blue-600 p-8">
+    <div className="min-h-screen bg-pink-400 p-8">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex items-center justify-between">
           <h1 className="text-4xl font-bold text-white">Dashboard</h1>
